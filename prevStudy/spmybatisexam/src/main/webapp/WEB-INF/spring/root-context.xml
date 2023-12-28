@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean class="org.mybatis.spring.SqlSessionTemplate" id="sqlSession">
+		<constructor-arg ref="sqlSessionFactoryBean"></constructor-arg>
+	</bean>
+	
+	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactoryBean"> <!--클래스가 존재-->
+		<property name="dataSource" ref="dataSource"></property>	<!-- name:클래스 내에 setter를 통해 저장된 값을 불러움-->
+		<property name="configLocation" value="classpath:/config/mybatisConfig.xml"></property> <!-- resources에서 config 폴더를 만든 뒤, xml 파일 생성. 해당 파일 경로(resources이하)를 입력 -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:/mappers/Member.xml</value>
+				<value>classpath:/mappers/Board.xml</value>
+				<value>classpath:/mappers/Sample.xml</value>
+			</list>
+		</property>
+	</bean>	
+	
+<!-- 	<bean class="kr.co.dongwoo.SqlSessionFactoryBeanMy" id="sqlSessionFactoryBeanMy">
+		<property name="dataSource"></property>
+		<property name="myConfigLocation" value="aaa"></property>
+	</bean> -->
+			
+	<bean class="com.zaxxer.hikari.HikariDataSource" id="dataSource">
+		<constructor-arg ref="hikariConfig"/>
+	</bean>
+	<bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@192.168.0.49:1521:xe"></property>
+		<property name="username" value="dongwoo"></property>
+		<property name="password">
+			<value>dongwoo</value>
+		</property>
+	</bean>
+	
+ 	<context:component-scan base-package="kr.co.dongwoo" /> 
+		
+</beans>

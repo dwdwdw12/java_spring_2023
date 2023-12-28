@@ -1,0 +1,38 @@
+작업순서
+A.Oracle SQL Developer에서 테이블 생성하기.
+
+B.STS에서 프로젝트 생성 및 설정 작업을 마친후 다음 작업을 수행
+생성할 폴더: src/main/java>com.dongwoo.member.controller/com.dongwoo.member.dao
+			/com.dongwoo.member.domain/com.dongwoo.member.service
+	  : src/test/java > com.dongwoo.member.dao
+1.com.dongwoo.member.domain > MemberVO
+	->SQL Developer에서 생성한 테이블의 칼럼명 및 타입과 일치하게 만들기
+
+2.src > main > webapp > WEB-INF > views > meberjoin.jsp
+	->입력폼 만들기(label, id, name이 VO 객체의 필드명과 완벽히 일치하게)
+
+3.com.dongwoo.member.dao > MemberDAO(인터페이스) 
+	->CRUD 메소드 선언(insert, delete, update, get/getall)
+
+4.com.dongwoo.member.dao > MemberDAOImpl + implements MemberDAO
+	->add unimplemented method, 반환값 손보기
+
+5.src/test/java > com.dongwoo.member.dao > MemberDAOTest
+	->@RunWith(SpringJUnit4ClassRunner.class)
+	   @ContextConfiguration(locations="/bean.xml"), 필요한 부분 import하기. 파일이름은 큰 상관없음
+	->src/main/resources에 bean.xml 파일 생성하기
+	-->context에 대한 assertNotnull
+	->test에 필요한 데이터 생성, memberVO에서 생성자가 제대로 사용되었는지 확인. 
+				->필요한 경우에, @NoArgsConstructor, @AllArgsConstructor 사용
+
+6.com.dongwoo.member.dao > MemberDAOImpl
+	->Jdbc Template 선언	->setter 생성
+	->RowMapper 생성	-> 익명메서드 생성, override 후, VO 객체의 각 요소를 resultset에서 가져온 뒤 vo에 set.
+	->각 CRUD 메서드를 override.
+
+7.bean.xml -> 연결, jdbctemplate 정보 작성
+
+8.com.dongwoo.member.dao > MemberDAOTest
+	->CRUD 작업 테스트 해보기
+
+9.com.dongwoo.member.service 에서 3~4번 과정 수행->필요에 따라서 선행 작업이 이루어지기 때문에, 서비스에서 따로 만듦

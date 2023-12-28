@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="iocbase.MyForLoopThree" id="myForLoopThree">
+		<property name="start" value="1" />
+		<property name="end" value="100" />
+		<property name="incre" value="1" />
+	</bean>
+
+	<bean class="iocbase.FrontService" id="service">
+		<constructor-arg ref="myForLoopThree"></constructor-arg>
+	</bean>					<!-- 위의 id와 같게 설정 -->
+	
+</beans>

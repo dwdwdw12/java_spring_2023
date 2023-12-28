@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean
+		class="org.springframework.jdbc.datasource.SimpleDriverDataSource" id="dataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url"
+			value="jdbc:oracle:thin:@192.168.0.49:1521:xe"></property>	<!--또는 local host, 127.0.0.1-->
+		<property name="username" value="dongwoo"></property>
+		<property name="password" value="dongwoo"></property>	<!--사용자에게 필요한 것2. connection -->
+	</bean>														<!--DB가 바뀌면 이 부분의 정보만 수정하기-->
+
+	<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">											
+		<property name="dataSource" ref="dataSource"></property>	<!--사용자에게 필요한 것. jdbcTemplate -->
+	</bean>
+
+	<bean class="com.dongwoo.member.dao.MemberDAOImpl" id="memberDAO">   <!-- 사용자, DAO의 개수만큼 만들기 -->
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+
+	<bean class="com.dongwoo.member.service.MemberServiceImpl" id="memberService">
+		<property name="dao" ref="memberDAO"></property>	<!-- setter를 사용함 -->
+	</bean>
+	
+	<bean class="com.dongwoo.member.dao.BoardDAOImpl" id="boardDAO">
+		<property name="jdbcTemplate" ref="jdbcTemplate"></property>
+	</bean>
+		
+</beans>

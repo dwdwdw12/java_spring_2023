@@ -1,0 +1,59 @@
+select * from 테이블명
+<where>
+	<if text="조건식">
+		컬럼명1=데이터
+	</if>
+	<if text="조건식2">
+		and 컬럼명2=데이터
+	</if>
+	<if text="조건식3">
+		or 컬럼명3=데이터
+	</if>
+
+</where>
+
+<where> 태그 
+	=>하위 엘리먼트에서 생성한 내용이 있을 경우, 앞에 where을 붙여주고 생성한 내용이 없으면 무시한다.
+	하위 엘리먼트가 있고, 불필요한 and나 or 구문이 있을 경우 and나 or을 제거해준다.
+				(where절 이하가 and나 or로 시작할 경우)
+	and, or이 아닌 ,(comma), || 등이 들어가면 trim으로 제거해야 함.
+
+===================================================================================
+(Mybatis-resources>mappers>xml 파일)
+<update id="aaa", parameterType="...">
+	update 테이블명
+		<trim prefix="set" suffixOverride=",">		//뒤에 붙은 , 제거
+			<if test="조건식">
+				컬럼명1=#{데이터},
+			</if>
+			<if test="조건식2">
+				컬럼명2=#{데이터}
+			</if>
+		</trim>
+	where 컬럼명3=#{데이터}
+</update>
+
+<update id="aaa", parameterType="...">
+	update 테이블명
+		<trim prefix="set" prefixOverride=",">		//앞에 붙은 ,를 제거
+			<if test="조건식">
+				컬럼명1=#{데이터}
+			</if>
+			<if test="조건식2">
+				,컬럼명2=#{데이터}
+			</if>
+		</trim>
+	where 컬럼명3=#{데이터}
+</update>
+================================================================================
+<select id="selectPostIn" resultType="domain.blog.Post">
+	SELECT *
+		FROM POST P
+		<where>			//안쪽의  태그 조건에 만족(foreach 구문일때 결과가 있는 경우?)하면 where절을 붙인다.
+			<foreach item="item" index="index" collection="list"
+			open="ID in (" separator="," close=")" nullable="true">
+			#{item}
+			</foreach>
+		</where>
+</select>
+

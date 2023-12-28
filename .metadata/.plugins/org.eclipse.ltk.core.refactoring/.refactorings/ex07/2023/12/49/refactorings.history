@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;CustomUser.java&apos; to &apos;project/src/main/java/com.airline.vo&apos;&#x0D;&#x0A;- Original project: &apos;ex07&apos;&#x0D;&#x0A;- Destination element: &apos;project/src/main/java/com.airline.vo&apos;&#x0D;&#x0A;- Original element: &apos;org.zerock.domain.CustomUser.java&apos;" description="Copy compilation unit" destination="=project/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;com.airline.vo" element1="/src\/main\/java=/optional=/true=/=/maven.pomderived=/true=/&lt;org.zerock.domain{CustomUser.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1702017244458" units="1" version="1.0"/>
+</session>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.2.xsd
+		http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd">
+
+	<context:component-scan base-package="com.springbook.biz"/>	
+	
+	<bean id="log" class="com.springbook.biz.common.Log4jAdvice">	</bean>
+	<bean id="log2" class="com.springbook.biz.common.LogAdvice">	</bean>
+	<bean id="log3" class="com.springbook.biz.common.AroundAdvice">	</bean>
+	
+	
+	<aop:config>
+		<aop:pointcut id="allPointCut" 
+			expression="execution(* com.springbook.biz..*Impl.*(..))" />			<!-- 모든 join point 중에서 point cut 지정 -->
+			<!-- expression="execution(* com.springbook.biz..*Impl.get*(..))" />	 --> <!-- get으로 시작하는 메서드만 point cut 지정 -->
+											<!-- 대문자로 써야함... 이유 : 클래스 명을 나타냄. Impl로 끝나는 클래스 대상 -->
+		<aop:aspect ref="log3">
+			<!-- <aop:before pointcut-ref="allPointCut" method="printLog"/> -->
+			<aop:around pointcut-ref="allPointCut" method="aroundLog"/>		<!-- around : 앞, 뒤 모두 -->
+		</aop:aspect>					<!-- point cut에 printLogging이라는 메서드를 삽입 -->
+	</aop:config>
+
+</beans>

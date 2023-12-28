@@ -1,0 +1,5 @@
+Oracle에서 테스트해본 뒤,
+메모장에 쿼리문을 작성해두기
+select * from members 	=> id, 메서드 : getAllMember
+select * from members where memId = #{memId} => id, 메서드 : getMember(String memId)
+update members set memPassword = #{memPassword} where memId=#{memId} => id, 메서드 : updateMember(MemberVO vo)

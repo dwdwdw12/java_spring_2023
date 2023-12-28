@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.dongwoo.board">	<!-- 사용할 클래스 -->
+	
+  	<select id="boardList" parameterType="hashMap" resultType="BVO">
+  		<![CDATA[
+  		select * from (select rownum rnum, imsi.* from (select * from board order by BOARD_RE_REF desc, BOARD_RE_SEQ asc) imsi) where rnum>=#{start} and rnum<=#{end} 
+  		]]>
+  	</select>
+  	
+  	<select id="boardCount" resultType="int">
+  		select count(*) from board
+  	</select>
+  	
+  	<select id="maxNum" resultType="int">
+  		select max(board_num) from board
+  	</select>
+  	
+  	<select id="boardDetail" parameterType="int" resultType="BVO">
+  		select * from board where BOARD_NUM = #{board_num}
+  	</select>
+  	
+  	<insert id="boardAdd" parameterType="BVO">
+  		insert into board values(#{board_num},#{board_name},#{board_pass},#{board_subject},#{board_content},null,#{board_re_ref},0,0,0,sysdate)
+  	</insert>
+  	
+  	<delete id="boardDelete" parameterType="int">
+  		delete from board where BOARD_num=#{board_num}
+  	</delete>
+  	
+  	<update id="boardModify" parameterType="BVO">
+  		update board set BOARD_SUBJECT=#{board_subject},BOARD_CONTENT=#{board_content} where BOARD_NUM=#{board_num}
+  	</update>
+  	
+  	<update id="seqModify" parameterType="BVO">
+  		<![CDATA[
+  		update board set BOARD_RE_SEQ=BOARD_RE_SEQ+1 where BOARD_RE_REF=#{board_re_ref} and BOARD_RE_SEQ>#{board_re_seq}
+  		]]>
+  	</update>
+  	
+  	<update id="readCount" parameterType="int">
+  		update board set BOARD_READCOUNT = BOARD_READCOUNT+1 where BOARD_NUM = #{board_num}
+  	</update>
+  	
+  	<insert id="boardReply" parameterType="BVO">
+  		insert into board (BOARD_NUM,BOARD_NAME,BOARD_PASS,BOARD_SUBJECT,BOARD_CONTENT, BOARD_FILE,BOARD_RE_REF,BOARD_RE_LEV,
+  		BOARD_RE_SEQ, BOARD_READCOUNT,BOARD_DATE) values(#{board_num},#{board_name},#{board_pass},#{board_subject},
+					#{board_content},null,#{board_re_ref},#{board_re_lev},#{board_re_seq},#{board_readcount},sysdate)
+  	</insert>
+  	
+  	<!-- <select id="boardPassword" parameterMap="int" resultType="BVO">
+  		select BOARD_PASS from board where BOARD_NUM=#{BOARD_NUM}
+  	</select> -->
+  	
+</mapper>

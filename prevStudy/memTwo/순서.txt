@@ -1,0 +1,9 @@
+1.pom.xml작성
+2.root-context > bean 작성
+3.memberservice @autowired
+4.interface memberservice
+5.memberserviceimpl class->implements 후 @Service
+			@autowired memberDAO dao
+			
+6.memberdao, memberdaoimpl->@repository
+7.homecontroller>home.jsp

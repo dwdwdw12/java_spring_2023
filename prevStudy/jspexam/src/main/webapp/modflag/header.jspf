@@ -1,0 +1,17 @@
+<%@page import="java.util.Date"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"%> 
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	Date now = new Date();
+	String text = "가나다라마바사";
+%>
+	<header>	<!-- 중복되는 부분을 지워서 페이지 소스를 간소화하기 -->
+		<h1>이 부분은 헤더에 들어가는 내용을 조각화한 것입니다.</h1>
+		<h1>이 부분은 헤더에 들어가는 내용을 조각화한 것입니다.</h1>
+	</header>

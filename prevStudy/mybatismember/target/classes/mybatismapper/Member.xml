@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- <mapper namespace="kr.co.dongwoo.memberNs"> -->  <!-- 원래 정석-->
+<mapper namespace="memberNs">
+	<select id="selectMemberId" parameterType="string" resultType="MemVO">
+		select * from members where memId=#{memId}  
+	</select>	<!-- ?대신 EL 표기법 사용. $(대다수. 칼럼명/테이블명을 데이터로 가져와 적용할때/외부에서 가져올 때.), 
+						#(가끔.조회에 쓰이는 데이터)-->
+	<select id="selectMemberAll" resultType="MemVO">
+		select * from members;
+	</select>
+	
+	<!-- insert,delete,update->정수형 반환. -->
+	<insert id="insertMember" parameterType="MemVO">
+		insert into members values(#{memId},#{memPassword},#{memName},#{email},#{postCode},#{detailAddress},sysdate)
+	</insert>
+									<!--String은 기본타입 취급. 대소문자 구분x-->
+	<delete id="deleteMember" parameterType="String">
+		delete from members where memId=#{memId}
+	</delete>
+	
+	<update id="updateMember" parameterType="MemVO">
+		update members set memPassword = #{memPassword}, memName=#{memName}, email = #{email} where memId=#{memId}
+	</update>
+	
+	
+</mapper>
+
+<!-- CRUD 쿼리를 넣어줄 곳. -->

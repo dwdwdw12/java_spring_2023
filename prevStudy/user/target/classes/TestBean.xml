@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<bean class="com.dongwoo.user.service.Ccccc" id="ccccc">
+		<property name="driver" value=" oracle.jdbc.driver.OracleDriver"></property>	<!--setter method를 통한 값 주입-->
+		<property name="url" value="abcd"></property>
+		<property name="password" value="gildong"></property>
+		<property name="numdata" value="22"></property>
+	</bean>
+	
+	<bean class="com.dongwoo.user.service.Bbbbb" id="bbbbb">							<!--생성자 method를 통한 참조 주입-->
+		<constructor-arg ref="ccccc"></constructor-arg>
+	</bean>
+	
+	<bean class="com.dongwoo.user.service.Aaaaa" id="aaaaa">							<!--setter method를 통한 참조 주입-->
+		 <description>Aaaaa클래스가 Setter 메서드를 통해서 Bbbbb 클래스를 주입받는다.</description>	<!--description-그냥 설명-->
+		 <property name="obj" ref="bbbbb"></property>	<!--기본타입이 아닌 경우, ref를 사용.-->
+	</bean>
+
+</beans>

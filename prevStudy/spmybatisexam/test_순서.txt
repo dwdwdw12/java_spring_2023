@@ -1,0 +1,25 @@
+Test 순서
+1.annotation 설정
+	@RunWith(SpringJUnit4ClassRunner.class)
+	@ContextConfiguration("file:src/main/webapp/WEB-INF/spring/root-context.xml")
+
+2. contextTest
+	@Autowired
+	ApplicationContext context;
+	
+	assertNotNull(context);
+	
+	빈 목록 추출 가능(context.getBeanDefinitionNames()).
+
+3.connectionTest
+	@Autowired
+	DataSource ds;
+	
+	assertNotNull(ds);
+
+4.각 method test
+	@Autowired
+	MemberDAO dao;
+	
+	assertNotNull(dao.getMember("333"));
+	System.out.println()으로 결과 확인 가능.

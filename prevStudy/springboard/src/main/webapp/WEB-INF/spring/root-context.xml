@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<context:component-scan base-package="kr.co.dongwoo"></context:component-scan>
+<!-- 	<context:property-placeholder location=""/>  -->
+	<bean class="com.zaxxer.hikari.HikariConfig" id="hikariConfig" >
+		<property name="driverClassName" value="oracle.jdbc.OracleDriver"></property>
+		<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:xe"></property>
+		<property name="username" value="dongwoo"></property>
+		<property name="password" value="dongwoo"></property>
+	</bean>
+	<bean class="com.zaxxer.hikari.HikariDataSource" id="dataSource">
+		<constructor-arg ref="hikariConfig"></constructor-arg>
+	</bean>
+	<!-- 스프링에서 제공하는 JDBCTemplate을 이용하여 DAO 클래스를 작성할 경우 bean 등록 -->
+	<bean class="org.springframework.jdbc.core.JdbcTemplate" id="jdbcTemplate">
+		<property name="dataSource" ref="dataSource"></property>
+	</bean>
+	<!-- Mybatis(Ibatis)를 이용하여 DAO 작업을 할 경우, 위의 jdbctemplate bean을 지우고, SqlSessionFactory bean을 등록(찾아보기) -->
+	
+</beans>

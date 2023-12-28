@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+ 	<typeAliases>
+ 		<typeAlias type="kr.co.dongwoo.vo.MemberVO" alias="MemVO"/>
+ 	</typeAliases>	<!-- 별명을 달아주기 위해서. 선택사항 -->
+</configuration>

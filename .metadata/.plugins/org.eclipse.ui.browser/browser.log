@@ -1,0 +1,6 @@
+
+11월 06, 2023 11:53:29.223 NEW SESSION
+11월 06, 2023 11:53:29.223 [7680:2040:1106/115329.221:ERROR:login_database.cc(850)] Password store database is too new, kCurrentVersionNumber=34, GetCompatibleVersionNumber=40
+11월 06, 2023 11:53:29.223 [7680:2040:1106/115329.222:ERROR:login_database_async_helper.cc(54)] Could not create/open login database.
+11월 06, 2023 11:53:29.224 [7680:8168:1106/115329.223:ERROR:login_database.cc(850)] Password store database is too new, kCurrentVersionNumber=34, GetCompatibleVersionNumber=40
+11월 06, 2023 11:53:29.224 [7680:8168:1106/115329.223:ERROR:login_database_async_helper.cc(54)] Could not create/open login database.

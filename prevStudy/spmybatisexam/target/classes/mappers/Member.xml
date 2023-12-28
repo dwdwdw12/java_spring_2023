@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.co.dongwoo.member">	<!-- 사용할 클래스 -->
+			<!--mybatisConfig에서 alias를 설정해 줄임말로 사용가능 -->
+  	<select id="getMember" parameterType="String" resultType="MVO">
+  		select * from members where memId=#{memId}
+  	</select>
+  	
+  	<!-- 쿼리문 안에 < , > 이 포함되면, 태그로 인식되어 오류가 발생. <![CDATA[ ... ]]>를 삽입하기. -->
+  	
+  	<select id="getMemberMap" parameterType="hashMap" resultType="MVO">
+  		select * from members where regiDate between #{startNum} and #{endNum} 
+<!--   		select * from members where firstName= #{startNum} and lastName=#{endNum}  -->
+  	</select>
+  	
+  	<!-- update, delete, insert->resultType 없음 -->
+  	<update id="updateMember" parameterType="MVO">
+  		update members set memPassword = #{memPassword} where memId=#{memId}
+  	</update>
+  	
+  	<select id="getAllMember" resultType="MVO">
+  	 	select * from members
+  	</select>
+  	
+  	<select id="getMemberForEach" resultType="MVO" parameterType="List"> <!-- parameterType: 넘겨받을 때 사용하는 타입. 자바의 기본형이면 생략가능-->
+  		select * from members
+		<where>	
+			<foreach item="item" index="index" collection="list" open="postCode in (" separator="," close=")" > <!-- nullable="true" --> 
+			#{item}
+			</foreach>  
+		</where>
+  	</select>
+  	
+  	<insert id="insertMember" parameterType="MVO">
+  		insert into members values(#{memId},#{memPassword},#{memName},#{email},#{postCode},#{detailAddress},sysdate)
+  
+  	</insert>
+  	
+</mapper>

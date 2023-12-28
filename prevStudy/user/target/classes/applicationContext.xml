@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+	<!--2개를 추가 =>2개의 bean. 클래스를 추가해주기-->  <!--설정 정보-->
+	
+	<bean class="com.dongwoo.user.dao.UserDao" id="userDao">
+		<property name="inter" ref="connectionInter" /> 	<!--setter 필요, setter-property -->
+		<!-- <constructor-arg ref="connectionInter"></constructor-arg> -->		<!--ref: setter에 주입할 bean(객체)의 이름, constructor-constructor-arg -->
+	</bean>	
+	
+	
+	<bean class="com.dongwoo.user.dao.OracleConnection" id="connectionInter"> 	 
+	<!--id는 인터페이스 이름으로 하는 것이 좋음. 의뢰가 바뀔경우, 소스가 아니라 설정정보를 바꿈-->
+	<!--유지보수 편리, 가시성이 좋음 의존 주입/의존역전 참고-->
+	<!--설정작업이 오래 걸릴 수도 있음, 유연성이 떨어짐-->
+	</bean>   
+</beans>

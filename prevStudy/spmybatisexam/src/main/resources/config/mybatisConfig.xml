@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-config.dtd"> <!-- mybatis dtd 검색 -->
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="kr.co.dongwoo.vo.MemberVO" alias="MVO"/>
+		<typeAlias type="kr.co.dongwoo.vo.BoardVO" alias="BVO"/>
+	</typeAliases>
+</configuration>

@@ -1,0 +1,14 @@
+ <Context> 
+     <Resource name="jdbc/OracleDB" 
+         auth="Container"
+         type="javax.sql.DataSource" 
+         username="dongwoo" 
+         password="dongwoo"
+         driverClassName="oracle.jdbc.driver.OracleDriver"
+         factory="org.apache.tomcat.dbcp.dbcp2.BasicDataSourceFactory"
+         url="jdbc:oracle:thin:@192.168.0.49:1521:xe"
+         maxActive="500" 
+         maxIdle="100"/>  
+         <!-- maxActive: 커넥션풀을 500개 만들어서, 필요할때 꺼내어 쓰겠다.  -->
+         <!-- Server Runtime>tomcat-dbcp.jar> org.apache.tomcat.dbcp.dbcp2>BasicDataSourceFactory.class 파일 찾아보고, 경로 주의하기-->
+ </Context>

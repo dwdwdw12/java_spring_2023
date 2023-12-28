@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- 	<bean id="tv" class="com.ezen.polymophism.SamsungTV" init-method="initMethod" 
+				 destroy-method="destoryMethod" lazy-init="true" scope="prototype"></bean> -->
+				 
+				 
+<!--	<bean id="tv" class="com.ezen.polymophism.SamsungTV">
+		<constructor-arg ref="apple"></constructor-arg>		ref="sony" 교체가능
+		<constructor-arg value="40000"></constructor-arg>	
+	</bean> -->	<!-- 생성자 주입. value도 넣을 수 있음. 자바 코드를 수정할 필요가 없다는 장점이 있음. xml만 수정하면 됨. -->
+	
+	
+	<bean id="tv" class="com.ezen.polymophism.SamsungTV">
+		<property name="speaker" ref="apple"></property>	<!-- name="..."에는 set메서드에 사용된 문자를 삽입(setSpeaker->name="speaker"). -->
+		<property name="price" value="35000"></property>	
+	</bean>	<!-- setter 주입 -->
+	
+	<bean id="tv2" class="com.ezen.polymophism.LGTV"></bean>
+	<!-- id가 겹치지 않도록. -->
+	
+	<bean id="sony" class="com.ezen.polymophism.SonySpeaker"></bean>
+	<bean id="apple" class="com.ezen.polymophism.AppleSpeaker"></bean>
+	
+</beans>
